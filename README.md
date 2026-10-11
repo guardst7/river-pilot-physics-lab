@@ -2,7 +2,7 @@
 
 Independent, **headless** qualification harness for the 2D physics foundation of River Pilot. This repository is a test laboratory, **not** a separate game or a fork of Box2D. It measures behavior before code is integrated into the game.
 
-**Status:** starter implementation. The included scenarios and harness code need their first run against the pinned corrected Box2D source on a developer machine. The physical acceptance thresholds are provisional, not approved simulation specifications. No collision-performance conclusions are claimed here.
+**Status:** Phase 0A and 0B executed and analyzed on the user's pinned source; Phase 0B-2 user-verified (17/17 tests; 8 single-versus-two-contact scenarios), results analyzed in `docs/11_PHASE0B2_PINNED_RESULTS_AND_NEXT_SLICE.md`. Physical acceptance thresholds remain provisional; no engine qualification is claimed.
 
 ## Five-minute Windows setup
 
@@ -79,3 +79,27 @@ The ZIP contains no `.git` directory and doesn't push anything. Copy files into 
 ## Licensing
 
 No Box2D source or compiled bundle is distributed in this lab starter. The engine is obtained separately and remains under its own MIT license; retain upstream notices if distribution of vendor binaries is later authorized. No license is assigned to this new project by the starter archive; use the license settings of your GitHub repository or select one explicitly.
+
+## Phase 0B — Contact symmetry diagnostics (optional research run)
+
+**Run this only after Phase 0A has been verified.** Phase 0B is still a *diagnostic*, not a physics acceptance gate.
+
+```powershell
+npm.cmd test
+npm.cmd run scenarios
+npm.cmd run diagnostics:contacts
+```
+
+The new report is `.reports/phase0b-contact-diagnostics.json` (gitignored). Its 66 cases vary friction, near-center offsets, creation order, solver substeps/timestep, and a symmetric chamfered bow. The report contains first contact timing, manifold point counts/locations, available impulses, post-contact angular velocity, final yaw and signed mirror/order comparisons. See [docs/08_PHASE0B_CONTACT_DIAGNOSTICS.md](docs/08_PHASE0B_CONTACT_DIAGNOSTICS.md) for interpretation, caveats and handoff protocol. The experiment does **not** alter the pinned Box2D source.
+
+
+## Phase 0B-2 — Single-contact reference (small next slice)
+
+```powershell
+npm.cmd test
+npm.cmd run diagnostics:contact-count
+```
+
+The additional **8 diagnostic scenarios** compare a centered, circle-only **single-point** contact reference to the original rectangular **two-point** contact, both with friction 0 and 0.3 and both creation orders. The circle is not a vessel hull: the solver mass, COM and rotational inertia are matched to the rectangle intentionally. New output is `.reports/phase0b2-contact-count-reference.json` (ignored by Git). **17 infrastructure tests** are expected with this patch. Review [docs/10_PHASE0B2_SINGLE_VS_TWO_CONTACT.md](docs/10_PHASE0B2_SINGLE_VS_TWO_CONTACT.md) and [docs/05_HANDOFF.md](docs/05_HANDOFF.md) before any further work. No engine source was modified.
+
+**Current evidence and next slice:** [Phase 0B-2 pinned-run findings](docs/11_PHASE0B2_PINNED_RESULTS_AND_NEXT_SLICE.md). No solver defect or maritime qualification claim yet.

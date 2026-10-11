@@ -36,3 +36,9 @@ The provisional values in `src/assessment.mjs` are an explicit starting hypothes
 - Later: vessel mass/COM/inertia, multi-vessel force transfer, joints/assemblies, shoreline/grounding, maritime forces, measured realism and performance budgets.
 
 **Until approved Phase 0 testing passes, River Pilot physics migration remains paused.**
+
+## Phase 0B contact diagnostics (new; non-gating)
+
+`npm.cmd run diagnostics:contacts` runs a 66-case investigative matrix and saves `.reports/phase0b-contact-diagnostics.json` (ignored). It **never applies the provisional 0.5° Phase 0A yaw threshold to declare an engine defect.** Measurements include solver-reported contact manifolds, friction changes, small offset perturbations, timestep/substep sensitivity, and a symmetric chamfered bow. See `docs/08_PHASE0B_CONTACT_DIAGNOSTICS.md`.
+
+**Naming clarification:** This `Phase 0B` label refers specifically to *collision contact diagnostics*, consistent with the current user-approved experiment. The older roadmap called unrelated CCD/origin/performance qualification `0B`; those future subjects are now designated **Phase 0C (not authorized yet)**. Neither phase automatically authorizes maritime models or River Pilot integration.

@@ -12,6 +12,8 @@
     "verify:box2d": "node tools/verify-box2d.mjs",
     "test": "node tools/verify-box2d.mjs && node --test",
     "scenarios": "node tools/verify-box2d.mjs && node tools/run-scenarios.mjs",
+    "diagnostics:contacts": "node tools/verify-box2d.mjs && node tools/run-phase0b.mjs",
+    "diagnostics:contact-count": "node tools/verify-box2d.mjs && node tools/run-phase0b2.mjs",
     "qualify": "node tools/verify-box2d.mjs && node tools/run-scenarios.mjs --enforce"
   }
 }
