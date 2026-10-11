@@ -1,0 +1,8 @@
+# Exact pinned vendor clone: reproducible via npm run setup:box2d
+.vendor/
+.reports/
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+.vscode/*.local.json

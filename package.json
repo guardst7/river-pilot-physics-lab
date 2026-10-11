@@ -1,0 +1,17 @@
+{
+  "name": "river-pilot-physics-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Headless, independently reproducible Box2D physics qualification lab for River Pilot",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "setup:box2d": "node tools/setup-box2d.mjs",
+    "verify:box2d": "node tools/verify-box2d.mjs",
+    "test": "node tools/verify-box2d.mjs && node --test",
+    "scenarios": "node tools/verify-box2d.mjs && node tools/run-scenarios.mjs",
+    "qualify": "node tools/verify-box2d.mjs && node tools/run-scenarios.mjs --enforce"
+  }
+}

@@ -1,0 +1,25 @@
+name: Physics lab smoke and baseline
+on:
+  push:
+  pull_request:
+jobs:
+  headless-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Obtain pinned Box2D source
+        run: npm run setup:box2d
+      - name: Automated smoke/reproducibility tests
+        run: npm test
+      - name: Capture numerical baseline (diagnostic, non-blocking)
+        run: npm run scenarios
+      - name: Archive measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase0a-measurements
+          path: .reports/
+          if-no-files-found: ignore
